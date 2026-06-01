@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #0b1020;
+  --bg-secondary: #121a2f;
+  --surface: #1a2440;
+
+  --accent-cyan: #5ee6ff;
+  --accent-magenta: #c084fc;
+  --accent-amber: #ffb86c;
+
+  --text-primary: #e2e8f0;
+  --text-muted: #94a3b8;
+
+  --glow-cyan: 0 0 20px rgba(94, 230, 255, 0.35);
+
+  /* Retro fonts: VT323 for body, Press Start 2P for headings */
+  font-family: 'VT323', 'Press Start 2P', monospace, Inter, sans-serif;
+
+  color: var(--text-primary);
+  background: var(--bg-primary);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at top, #1b2445 0%, #0b1020 60%);
+  background-color: var(--bg-primary);
+  /* subtle scanline overlay */
+  background-image: linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px), radial-gradient(circle at top, rgba(27,36,69,0.08) 0%, transparent 60%);
+  background-size: 100% 2px, cover;
+  min-height: 100vh;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+/* Retro/Neon helpers */
+.retro-flicker {
+  animation: flicker 3s infinite linear;
+}
+
+@keyframes flicker {
+  0% { opacity: 1; }
+  6% { opacity: 0.6; }
+  8% { opacity: 1; }
+  10% { opacity: 0.3; }
+  70% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+@keyframes floaty {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+.retro-scan {
+  position: relative;
+  overflow: hidden;
+}
+.retro-scan::after {
+  content: '';
+  position: absolute;
+  left: -30%;
+  top: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+  transform: skewX(-20deg);
+  animation: scan 6s infinite linear;
+}
+
+@keyframes scan {
+  0% { left: -60%; }
+  100% { left: 120%; }
+}
+
+/* Retro button enhancement */
+.retro-button {
+  font-family: 'Press Start 2P', 'VT323', monospace;
+  letter-spacing: 0.18em;
+  box-shadow: 0 0 18px rgba(94,230,255,0.06), inset 0 0 20px rgba(94,230,255,0.02);
+  border: 1px solid rgba(94,230,255,0.14);
+}
+
+/* Simple 3D cube container */
+.retro-cube-scene {
+  perspective: 800px;
+}
+.retro-cube {
+  width: 64px;
+  height: 64px;
+  transform-style: preserve-3d;
+  transform: rotateX(-18deg) rotateY(18deg);
+  animation: cube-rotate 8s infinite linear;
+}
+.retro-cube .face {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(180deg, rgba(94,230,255,0.14), rgba(192,132,252,0.08));
+  border: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  font-size: 10px;
+  font-family: 'VT323', monospace;
+  text-transform: uppercase;
+}
+
+@keyframes cube-rotate {
+  0% { transform: rotateX(-18deg) rotateY(18deg); }
+  50% { transform: rotateX(22deg) rotateY(198deg); }
+  100% { transform: rotateX(-18deg) rotateY(378deg); }
+}
